@@ -1,0 +1,12 @@
+language: generic
+sudo: required
+services:
+  - docker
+
+#series of steps before deploying
+before_install:
+  - docker build -t tenaimij/docker-react -f Dockerfile.dev .
+
+#series of steps run test suites
+script:
+  - docker run -e CI=true tenaimij/docker-react npm run test -- --coverage  
